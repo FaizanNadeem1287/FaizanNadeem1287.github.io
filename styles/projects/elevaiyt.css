@@ -456,6 +456,12 @@ nav {
   margin-bottom: 0.75rem;
   line-height: 1;
 }
+.tech-icon img {
+  width: 28px;
+  height: 28px;
+  display: block;
+  filter: invert(100%) brightness(120%);
+}
 .tech-name {
   font-family: var(--display);
   font-size: 0.95rem;
