@@ -1,0 +1,7 @@
+# llm.txt — Site metadata for AI crawlers and indexing tools
+version: 1.0
+name: FaizanNadeem1287 Portfolio
+url: https://faizannadeem1287.github.io/
+description: Personal portfolio site showcasing ElevAIyt risk intelligence platform and other web design projects.
+sitemap: https://faizannadeem1287.github.io/sitemap.xml
+allow: /
