@@ -15,18 +15,15 @@
     <div class="cursor-ring" id="cursorRing"></div>
 
     <!-- NAV -->
-    <nav>
-      <a href="/" class="nav-logo">Faizan</a>
-      <a href="../index.html#projects" class="nav-back">
-        <svg viewBox="0 0 24 24" stroke-width="1.5">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M19 12H5M12 5l-7 7 7 7"
-          />
-        </svg>
-        Back to projects
-      </a>
+    <nav id="navbar">
+      <a href="../index.html#hero" class="nav-logo">Faizan</a>
+      <ul class="nav-links">
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#experience">Experience</a></li>
+        <li><a href="../index.html#testimonials">Testimonials</a></li>
+      </ul>
+      <a href="mailto:imfaizannadeem@gmail.com" class="nav-cta">Hire me</a>
     </nav>
 
     <!-- PROJECT HEADER -->
@@ -35,7 +32,7 @@
         Projects <span>/</span> ElevAIyt AI-Based Risk Intelligence Platform
       </div>
 
-      <div class="proj-title-row">
+      <!-- <div class="proj-title-row">
         <h1 class="proj-title reveal rd1">ElevAIyt</h1>
         <div class="proj-title-links reveal rd2">
           <a href="#" class="proj-link-btn primary">
@@ -59,7 +56,7 @@
             </svg>
           </a>
         </div>
-      </div>
+      </div> -->
 
       <!-- Meta strip -->
       <div class="proj-meta-strip reveal rd2">
@@ -665,6 +662,14 @@ class IssueTrackingService:
         ring.style.top = ry - 16 + "px";
         requestAnimationFrame(animRing);
       })();
+
+      // Nav scroll effect
+      const navbar = document.getElementById("navbar");
+      const syncNavbar = () => {
+        navbar.classList.toggle("scrolled", window.scrollY > 40);
+      };
+      window.addEventListener("scroll", syncNavbar);
+      syncNavbar();
 
       // Scroll reveal
       const io = new IntersectionObserver(
