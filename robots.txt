@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap reference for search engines
-Sitemap: https://faizannadeem1287.github.io/sitemap.xml
+Sitemap: https://www.faaaizan.space/sitemap.xml
 
 # Optional host directive for crawlers that support it
-Host: https://faizannadeem1287.github.io
+Host: https://www.faaaizan.space
