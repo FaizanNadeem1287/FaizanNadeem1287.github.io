@@ -252,6 +252,32 @@ nav.scrolled {
   border-color: var(--faint);
 }
 
+.hero-socials {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 1;
+}
+.hero-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s, transform 0.2s;
+}
+.hero-social svg {
+  width: 18px;
+  height: 18px;
+}
+.hero-social:hover {
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
 /* Scrolling tech strip */
 .tech-strip {
   margin-top: 5rem;
