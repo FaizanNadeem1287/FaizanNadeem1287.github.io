@@ -876,7 +876,7 @@ footer {
 .footer-copy {
   font-family: var(--mono);
   font-size: 0.7rem;
-  color: var(--faint);
+  color: var(--muted);
   letter-spacing: 0.04em;
 }
 .footer-socials {
