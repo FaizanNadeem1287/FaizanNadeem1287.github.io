@@ -884,15 +884,22 @@ footer {
   gap: 1rem;
 }
 .footer-social {
-  font-family: var(--mono);
-  font-size: 0.7rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
   color: var(--faint);
   text-decoration: none;
-  transition: color 0.2s;
-  letter-spacing: 0.05em;
+  transition: color 0.2s, transform 0.2s;
+}
+.footer-social svg {
+  width: 18px;
+  height: 18px;
 }
 .footer-social:hover {
   color: var(--accent);
+  transform: translateY(-2px);
 }
 .cta-band {
   background: var(--accent);
