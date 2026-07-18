@@ -29,16 +29,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
-    rel="stylesheet" />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MVPZY7B4V2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-MVPZY7B4V2');
-  </script>
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@500&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap"
+    rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@500&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap"
+      rel="stylesheet" />
+  </noscript>
   <link rel="stylesheet" href="../styles/projects/ai-rfp-manager-ai-powered-tender-management.css" />
   <script type="application/ld+json">
     {
@@ -240,7 +237,7 @@
       <div class="tech-grid">
         <div class="tech-card">
           <div class="tech-icon">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@15/icons/fastapi.svg" alt="FastAPI logo" width="28"
+            <img loading="lazy" src="https://cdn.jsdelivr.net/npm/simple-icons@15/icons/fastapi.svg" alt="FastAPI logo" width="28"
               height="28" />
           </div>
           <div class="tech-name">FastAPI</div>
@@ -250,7 +247,7 @@
         </div>
         <div class="tech-card">
           <div class="tech-icon">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@15/icons/postgresql.svg" alt="PostgreSQL logo"
+            <img loading="lazy" src="https://cdn.jsdelivr.net/npm/simple-icons@15/icons/postgresql.svg" alt="PostgreSQL logo"
               width="28" height="28" />
           </div>
           <div class="tech-name">PostgreSQL</div>
@@ -275,7 +272,7 @@
         </div>
         <div class="tech-card">
           <div class="tech-icon">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@15/icons/openai.svg" alt="OpenAI logo" width="28"
+            <img loading="lazy" src="https://cdn.jsdelivr.net/npm/simple-icons@15/icons/openai.svg" alt="OpenAI logo" width="28"
               height="28" />
           </div>
           <div class="tech-name">LLM + RAG Pipeline</div>
@@ -285,7 +282,7 @@
         </div>
         <div class="tech-card">
           <div class="tech-icon">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@15/icons/celery.svg" alt="Celery logo" width="28"
+            <img loading="lazy" src="https://cdn.jsdelivr.net/npm/simple-icons@15/icons/celery.svg" alt="Celery logo" width="28"
               height="28" />
           </div>
           <div class="tech-name">Celery + Redis</div>
@@ -295,7 +292,7 @@
         </div>
         <div class="tech-card">
           <div class="tech-icon">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@15/icons/railway.svg" alt="Railway logo" width="28"
+            <img loading="lazy" src="https://cdn.jsdelivr.net/npm/simple-icons@15/icons/railway.svg" alt="Railway logo" width="28"
               height="28" />
           </div>
           <div class="tech-name">Railway</div>
@@ -305,7 +302,7 @@
         </div>
         <div class="tech-card">
           <div class="tech-icon">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@15/icons/cloudflare.svg" alt="Cloudflare logo"
+            <img loading="lazy" src="https://cdn.jsdelivr.net/npm/simple-icons@15/icons/cloudflare.svg" alt="Cloudflare logo"
               width="28" height="28" />
           </div>
           <div class="tech-name">Cloudflare R2</div>
@@ -315,7 +312,7 @@
         </div>
         <div class="tech-card">
           <div class="tech-icon">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@15/icons/docker.svg" alt="Docker logo" width="28"
+            <img loading="lazy" src="https://cdn.jsdelivr.net/npm/simple-icons@15/icons/docker.svg" alt="Docker logo" width="28"
               height="28" />
           </div>
           <div class="tech-name">Docker</div>
@@ -578,6 +575,18 @@
     }
 
     document.querySelectorAll(".code-panel pre").forEach(highlightPython);
+  </script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    window.addEventListener('load', function () {
+      var s = document.createElement('script');
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-MVPZY7B4V2';
+      s.async = true;
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('config', 'G-MVPZY7B4V2');
+    });
   </script>
 </body>
 

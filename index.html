@@ -60,22 +60,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@500&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-MVPZY7B4V2"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-MVPZY7B4V2");
-    </script>
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@500&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
     <link rel="stylesheet" href="styles/styles.css" />
     <script type="application/ld+json">
       {
@@ -790,23 +785,19 @@
         });
       }
 
-      // Hero title stagger on load
-      document.addEventListener("DOMContentLoaded", () => {
-        const heroEls = document.querySelectorAll(
-          ".hero-badge, .hero-title, .hero-sub, .hero-actions, .tech-strip",
-        );
-        heroEls.forEach((el, i) => {
-          el.style.opacity = "0";
-          el.style.transform = "translateY(24px)";
-          el.style.transition = `opacity 0.8s ease ${i * 0.12}s, transform 0.8s ease ${i * 0.12}s`;
-          setTimeout(
-            () => {
-              el.style.opacity = "1";
-              el.style.transform = "none";
-            },
-            100 + i * 120,
-          );
-        });
+    </script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      window.addEventListener("load", function () {
+        var s = document.createElement("script");
+        s.src = "https://www.googletagmanager.com/gtag/js?id=G-MVPZY7B4V2";
+        s.async = true;
+        document.head.appendChild(s);
+        gtag("js", new Date());
+        gtag("config", "G-MVPZY7B4V2");
       });
     </script>
   </body>
