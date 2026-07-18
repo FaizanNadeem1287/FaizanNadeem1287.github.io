@@ -3,6 +3,3 @@ Allow: /
 
 # Sitemap reference for search engines
 Sitemap: https://www.faaaizan.space/sitemap.xml
-
-# Optional host directive for crawlers that support it
-Host: https://www.faaaizan.space
