@@ -1,7 +1,7 @@
 # llm.txt — Site metadata for AI crawlers and indexing tools
 version: 1.0
 name: Faizan Nadeem — Backend & AI Developer
-url: https://www.faaaizan.space/
+url: https://faaaizan.space/
 description: Portfolio of Faizan Nadeem, a backend and AI/LLM developer based in Islamabad, Pakistan. Builds scalable APIs, LLM-powered platforms (RAG, AI assessment, tender automation), and production backend systems with Python, FastAPI, Django, Node.js, PostgreSQL, and AWS. Available for freelance and contract work. Case studies: ElevAIyt (AI business assessment), AI RFP Manager (tender automation), Transify (CRM/ERP).
-sitemap: https://www.faaaizan.space/sitemap.xml
+sitemap: https://faaaizan.space/sitemap.xml
 allow: /

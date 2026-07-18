@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Sitemap reference for search engines
-Sitemap: https://www.faaaizan.space/sitemap.xml
+Sitemap: https://faaaizan.space/sitemap.xml
