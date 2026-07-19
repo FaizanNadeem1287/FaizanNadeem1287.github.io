@@ -1,0 +1,161 @@
+{{ define "main" }}
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    {{ partial "nav.html" . }}
+
+<noscript>
+      <style>
+        .reveal { opacity: 1; transform: none; }
+      </style>
+    </noscript>
+
+<main class="blog-main">
+    <!-- BLOG HEADER -->
+    <header class="blog-header reveal">
+      <div class="blog-breadcrumb">
+        <a href="/blogs/">Blogs</a> <span>/</span> {{ .Title }}
+      </div>
+
+      <h1 class="blog-title">{{ .Title }}</h1>
+
+      <!-- Meta strip -->
+      <div class="blog-meta-strip rd2">
+        <div class="meta-cell">
+          <div class="meta-label">Published</div>
+          <div class="meta-value">{{ .Date.Format "January 2, 2006" }}</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-label">Author</div>
+          <div class="meta-value">{{ .Params.author | default site.Params.author }}</div>
+        </div>
+        {{ with .Params.tags }}
+        <div class="meta-cell">
+          <div class="meta-label">Tags</div>
+          <div class="meta-value">
+            {{ range . }}
+            <span class="blog-tag">{{ . }}</span>
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+      </div>
+    </header>
+
+    <!-- HERO IMAGE -->
+    {{ with .Params.image }}
+    <figure class="blog-hero reveal rd3">
+      {{ partial "blog-image.html" (dict
+        "src" .
+        "alt" ($.Params.imageAlt | default $.Title)
+        "sizes" "(max-width: 640px) calc(100vw - 2.2rem), (max-width: 900px) calc(100vw - 3rem), 724px"
+        "widths" (slice 480 724 1084 1448)
+        "loading" "eager"
+        "priority" true
+      ) }}
+      {{ with $.Params.imageCredit }}
+      <figcaption class="blog-hero-credit">
+        {{ with $.Params.imageCreditURL }}<a href="{{ . }}" rel="noopener nofollow" target="_blank">{{ $.Params.imageCredit }}</a>{{ else }}{{ . }}{{ end }}
+      </figcaption>
+      {{ end }}
+    </figure>
+    {{ end }}
+
+    <!-- BODY -->
+    <div class="blog-body reveal rd4">
+      <div class="blog-content">
+        {{ .Content }}
+      </div>
+    </div>
+    <!-- /blog-body -->
+
+    <!-- LATEST 3 BLOGS -->
+    {{ $current := . }}
+    {{ $blogs := where .Site.RegularPages "Section" "blogs" }}
+    {{ $filteredBlogs := slice }}
+    {{ range $blogs }}
+      {{ if ne . $current }}
+        {{ $filteredBlogs = $filteredBlogs | append . }}
+      {{ end }}
+    {{ end }}
+    {{ $latest := first 3 $filteredBlogs }}
+
+    {{ if $latest }}
+    <div class="more-section reveal">
+      <h2 class="more-heading">More articles</h2>
+      <div class="more-grid blog-more-grid">
+        {{ range $index, $page := $latest }}
+        <a href="{{ .Permalink }}" class="more-card">
+          <div class="more-num">{{ printf "%02d" (add $index 1) }}</div>
+          <div class="more-name">{{ .Title }}</div>
+          <div class="more-desc">
+            {{ .Summary | truncate 120 }}
+          </div>
+          {{ with .Params.tags }}
+          <div class="more-tags">
+            {{ range . }}
+            <span class="more-tag">{{ . }}</span>
+            {{ end }}
+          </div>
+          {{ end }}
+          <span class="more-arrow">Read article →</span>
+        </a>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+</main>
+
+    <!-- FOOTER -->
+    {{ partial "footer.html" . }}
+{{ end }}
+
+{{ define "scripts" }}
+    {{ partial "cursor.html" . }}
+    <script>
+      // Nav scroll effect
+      const navbar = document.getElementById("navbar");
+      const syncNavbar = () => {
+        navbar.classList.toggle("scrolled", window.scrollY > 40);
+      };
+      window.addEventListener("scroll", syncNavbar);
+      syncNavbar();
+
+      // Scroll reveal.
+      // threshold must stay 0: a long post's .blog-body is many viewports tall,
+      // so its intersection ratio never reaches a fractional threshold and the
+      // element would stay hidden forever.
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0 },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+      // Hero reveal on load
+      document
+        .querySelectorAll(
+          ".blog-breadcrumb,.blog-title,.blog-meta-strip,.blog-hero",
+        )
+        .forEach((el, i) => {
+          el.style.opacity = "0";
+          el.style.transform = "translateY(20px)";
+          el.style.transition = `opacity .7s ease ${i * 0.12}s, transform .7s ease ${i * 0.12}s`;
+          setTimeout(
+            () => {
+              el.style.opacity = "1";
+              el.style.transform = "none";
+            },
+            80 + i * 120,
+          );
+        });
+
+    </script>
+    {{ partial "ga.html" . }}
+{{ end }}

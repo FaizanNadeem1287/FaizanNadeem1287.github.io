@@ -26,10 +26,11 @@
     )
   -}}
 {{- else if eq .Kind "section" -}}
+  {{- $sectionName := cond (eq .Section "blogs") "Blogs" "Projects" -}}
   {{- $graph = slice
     (dict
       "@type" "CollectionPage"
-      "name" .Params.name
+      "name" (.Params.name | default .Title)
       "url" .Permalink
       "description" (.Params.jsonldDescription | default .Description)
       "author" $person
@@ -38,15 +39,18 @@
       "@type" "BreadcrumbList"
       "itemListElement" (slice
         (dict "@type" "ListItem" "position" 1 "name" "Home" "item" site.BaseURL)
-        (dict "@type" "ListItem" "position" 2 "name" "Projects")
+        (dict "@type" "ListItem" "position" 2 "name" $sectionName)
       )
     )
   -}}
 {{- else -}}
+  {{- $isBlog := eq .Section "blogs" -}}
+  {{- $sectionName := cond $isBlog "Blogs" "Projects" -}}
+  {{- $sectionURL := cond $isBlog (printf "%sblogs/" site.BaseURL) (printf "%sprojects/" site.BaseURL) -}}
   {{- $graph = slice
     (dict
       "@type" "CreativeWork"
-      "name" .Params.name
+      "name" (.Params.name | default .Title)
       "url" .Permalink
       "description" (.Params.jsonldDescription | default .Description)
       "author" $person
@@ -55,8 +59,8 @@
       "@type" "BreadcrumbList"
       "itemListElement" (slice
         (dict "@type" "ListItem" "position" 1 "name" "Home" "item" site.BaseURL)
-        (dict "@type" "ListItem" "position" 2 "name" "Projects" "item" (printf "%sprojects/" site.BaseURL))
-        (dict "@type" "ListItem" "position" 3 "name" .Params.name)
+        (dict "@type" "ListItem" "position" 2 "name" $sectionName "item" $sectionURL)
+        (dict "@type" "ListItem" "position" 3 "name" (.Params.name | default .Title))
       )
     )
   -}}

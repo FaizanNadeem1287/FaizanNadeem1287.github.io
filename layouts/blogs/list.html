@@ -1,0 +1,94 @@
+{{ define "main" }}
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    {{ partial "nav.html" . }}
+
+<noscript>
+      <style>
+        .reveal { opacity: 1; transform: none; }
+      </style>
+    </noscript>
+
+<main class="blog-list-main">
+    <header class="blog-list-header reveal">
+      <h1 class="blog-list-title">Writing & Ideas</h1>
+      <p class="blog-list-subtitle">Thoughts on backend engineering, AI, and building software that scales.</p>
+    </header>
+
+    <div class="blog-grid reveal">
+      {{ $blogs := where .Site.RegularPages "Section" "blogs" }}
+      {{ range $index, $page := $blogs }}
+      <a href="{{ .Permalink }}" class="blog-card rd{{ add (mod $index 4) 1 }}">
+        {{ with .Params.image }}
+        <div class="blog-card-image">
+          {{ partial "blog-image.html" (dict
+            "src" .
+            "alt" ($page.Params.imageAlt | default $page.Title)
+            "sizes" "(max-width: 640px) calc(100vw - 2.2rem), (max-width: 900px) calc(50vw - 2rem), 366px"
+            "widths" (slice 366 550 732)
+            "loading" "lazy"
+          ) }}
+        </div>
+        {{ end }}
+        <div class="blog-card-content">
+          <div class="blog-card-meta">
+            <span>{{ .Date.Format "January 2, 2006" }}</span>
+          </div>
+          <h2 class="blog-card-title">{{ .Title }}</h2>
+          <p class="blog-card-summary">{{ .Summary | truncate 150 }}</p>
+          {{ with .Params.tags }}
+          <div class="blog-card-tags">
+            {{ range first 3 . }}
+            <span class="blog-card-tag">{{ . }}</span>
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+      </a>
+      {{ end }}
+    </div>
+</main>
+
+    <!-- FOOTER -->
+    {{ partial "footer.html" . }}
+{{ end }}
+
+{{ define "scripts" }}
+    {{ partial "cursor.html" . }}
+    <script>
+      // Nav scroll effect
+      const navbar = document.getElementById("navbar");
+      const syncNavbar = () => {
+        navbar.classList.toggle("scrolled", window.scrollY > 40);
+      };
+      window.addEventListener("scroll", syncNavbar);
+      syncNavbar();
+
+      // Scroll reveal
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0 },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+      
+      // Hero reveal on load
+      document.querySelectorAll(".blog-list-title, .blog-list-subtitle").forEach((el, i) => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(20px)";
+        el.style.transition = `opacity .7s ease ${i * 0.12}s, transform .7s ease ${i * 0.12}s`;
+        setTimeout(() => {
+          el.style.opacity = "1";
+          el.style.transform = "none";
+        }, 80 + i * 120);
+      });
+    </script>
+    {{ partial "ga.html" . }}
+{{ end }}

@@ -1,0 +1,66 @@
+{{- /*
+  Renders a responsive <img> for blog imagery.
+
+  Params:
+    src      - image path. Resolved against assets/ first so it can be
+               processed; anything else (e.g. a static/ or remote path) is
+               emitted as a plain <img> unchanged.
+    alt      - alt text (required for anything meaningful; "" for decorative)
+    sizes    - the CSS `sizes` attribute
+    widths   - slice of candidate widths for srcset
+    class    - optional class attribute
+    loading  - "lazy" (default) or "eager"
+    priority - true to add fetchpriority="high" (use for LCP images only)
+
+  Emits width/height on every path so the browser can reserve space and
+  avoid layout shift (CLS).
+*/ -}}
+
+{{- $src := .src -}}
+{{- $alt := .alt | default "" -}}
+{{- $sizes := .sizes | default "100vw" -}}
+{{- $widths := .widths | default (slice 480 800 1200) -}}
+{{- $class := .class | default "" -}}
+{{- $loading := .loading | default "lazy" -}}
+{{- $priority := .priority | default false -}}
+
+{{- $res := resources.Get $src -}}
+{{- $processable := slice "image/jpeg" "image/png" "image/webp" "image/tiff" -}}
+
+{{- if and $res (in $processable $res.MediaType.Type) -}}
+  {{- /* Never upscale: drop any candidate wider than the source. */ -}}
+  {{- $useable := slice -}}
+  {{- range $w := $widths -}}
+    {{- if le $w $res.Width -}}{{- $useable = $useable | append $w -}}{{- end -}}
+  {{- end -}}
+  {{- if not $useable -}}{{- $useable = slice $res.Width -}}{{- end -}}
+
+  {{- $srcset := slice -}}
+  {{- $largest := "" -}}
+  {{- range $w := $useable -}}
+    {{- $v := $res.Resize (printf "%dx webp q80" $w) -}}
+    {{- $srcset = $srcset | append (printf "%s %dw" $v.RelPermalink $v.Width) -}}
+    {{- $largest = $v -}}
+  {{- end -}}
+
+  <img
+    src="{{ $largest.RelPermalink }}"
+    srcset="{{ delimit $srcset ", " }}"
+    sizes="{{ $sizes }}"
+    width="{{ $largest.Width }}"
+    height="{{ $largest.Height }}"
+    alt="{{ $alt }}"
+    loading="{{ $loading }}"
+    decoding="async"
+    {{ with $class }}class="{{ . }}"{{ end }}
+    {{ if $priority }}fetchpriority="high"{{ end }} />
+{{- else -}}
+  {{- /* Unprocessable (static path, SVG, remote URL): emit as-is. */ -}}
+  <img
+    src="{{ $src | relURL }}"
+    alt="{{ $alt }}"
+    loading="{{ $loading }}"
+    decoding="async"
+    {{ with $class }}class="{{ . }}"{{ end }}
+    {{ if $priority }}fetchpriority="high"{{ end }} />
+{{- end -}}

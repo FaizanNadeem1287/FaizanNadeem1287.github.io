@@ -12,6 +12,13 @@ disableKinds = ["taxonomy", "term", "rss"]
   changefreq = "monthly"
   priority = 0.8
 
+# Server-side syntax highlighting for fenced code blocks in blog posts.
+# Emits Chroma CSS classes, coloured in assets/styles/blog.css.
+[markup.highlight]
+  noClasses = false
+  lineNos = false
+  tabWidth = 2
+
 [params]
   author = "Faizan Nadeem"
   email = "imfaizannadeem@gmail.com"
