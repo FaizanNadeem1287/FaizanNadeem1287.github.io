@@ -1,0 +1,11 @@
+{{- $p := cond .IsHome "" "/" -}}
+<nav id="navbar">
+  <a href="{{ $p }}#hero" class="nav-logo">Faizan</a>
+  <ul class="nav-links">
+    <li><a href="{{ $p }}#about">About</a></li>
+    <li><a href="{{ $p }}#projects">Projects</a></li>
+    <li><a href="{{ $p }}#experience">Experience</a></li>
+    <li><a href="{{ $p }}#testimonials">Testimonials</a></li>
+  </ul>
+  <a href="mailto:{{ site.Params.email }}" class="nav-cta">Hire me</a>
+</nav>

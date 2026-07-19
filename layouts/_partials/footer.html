@@ -1,0 +1,115 @@
+{{- $p := cond .IsHome "" "/" -}}
+<!-- FOOTER -->
+<footer>
+  <div class="cta-band">
+    <h2>Let's build something great together.</h2>
+    <p>Open to new projects and full-time roles. Let's talk.</p>
+    <a href="mailto:{{ site.Params.email }}">Get in touch →</a>
+  </div>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Faizan Nadeem</div>
+        <div class="footer-tagline">Backend Developer · Islamabad, PK</div>
+      </div>
+      <div>
+        <p class="footer-col-label">Navigate</p>
+        <ul class="footer-links">
+          <li><a href="{{ $p }}#about">About</a></li>
+          <li><a href="{{ $p }}#projects">Projects</a></li>
+          <li><a href="{{ $p }}#experience">Experience</a></li>
+          <li><a href="{{ $p }}#testimonials">Testimonials</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Contact</p>
+        <ul class="footer-links">
+          <li>
+            <a href="mailto:{{ site.Params.email }}" target="_blank"
+              >{{ site.Params.email }}</a
+            >
+          </li>
+          <li>
+            <a
+              href="{{ site.Params.calendly }}"
+              target="_blank"
+              >Schedule a call</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Elsewhere</p>
+        <ul class="footer-links">
+          <li>
+            <a href="{{ site.Params.github }}" target="_blank"
+              >GitHub</a
+            >
+          </li>
+          <li>
+            <a href="{{ site.Params.linkedin }}" target="_blank"
+              >LinkedIn</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy"
+        >Made with 💖 by
+        <a
+          href="{{ site.Params.linkedin }}"
+          target="_blank"
+          style="color: white; text-decoration: none"
+          >Faizan Nadeem</a
+        ></span
+      >
+      {{ if .IsHome }}
+      <div class="footer-socials">
+        <a
+          href="mailto:{{ site.Params.email }}"
+          target="_blank"
+          class="footer-social"
+          aria-label="Email"
+          >{{ partial "icons/email.html" . }}</a
+        >
+        <a
+          href="{{ site.Params.linkedin }}"
+          target="_blank"
+          class="footer-social"
+          aria-label="LinkedIn"
+          >{{ partial "icons/linkedin.html" . }}</a
+        >
+        <a
+          href="{{ site.Params.github }}"
+          target="_blank"
+          class="footer-social"
+          aria-label="GitHub"
+          >{{ partial "icons/github.html" . }}</a
+        >
+        <a
+          href="{{ site.Params.whatsapp }}"
+          target="_blank"
+          class="footer-social"
+          aria-label="WhatsApp"
+          >{{ partial "icons/whatsapp.html" . }}</a
+        >
+        <a
+          href="{{ site.Params.facebook }}"
+          target="_blank"
+          class="footer-social"
+          aria-label="Facebook"
+          >{{ partial "icons/facebook.html" . }}</a
+        >
+        <a
+          href="{{ site.Params.instagram }}"
+          target="_blank"
+          class="footer-social"
+          aria-label="Instagram"
+          >{{ partial "icons/instagram.html" . }}</a
+        >
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</footer>

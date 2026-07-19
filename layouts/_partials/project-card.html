@@ -1,0 +1,16 @@
+{{- $p := .page -}}
+{{- $name := $p.Params.cardTitle | default $p.Params.name -}}
+<div class="project-card">
+  <p class="project-num">{{ .num }}</p>
+  {{ if eq .heading "h2" }}<h2 class="project-name">{{ $name }}</h2>{{ else }}<h3 class="project-name">{{ $name }}</h3>{{ end }}
+  <p class="project-desc">
+    {{ $p.Params.cardDescription }}
+  </p>
+  <div class="project-tags">
+    {{ range $p.Params.tags }}<span class="project-tag">{{ . }}</span>
+    {{ end }}
+  </div>
+  {{ if $p.Params.externalUrl }}<a href="{{ $p.Params.externalUrl }}" target="_blank" rel="noopener noreferrer" class="project-link">View project →</a>
+  {{ else if ne $p.Params.caseStudy false }}<a href="{{ $p.RelPermalink }}" class="project-link">Case Study →</a>
+  {{ end }}
+</div>

@@ -1,0 +1,25 @@
+baseURL = "https://faaaizan.space/"
+locale = "en"
+title = "Faizan Nadeem — Backend & AI Developer"
+
+disableKinds = ["taxonomy", "term", "rss"]
+
+# The case-study pages are authored as raw HTML content files.
+[security]
+  allowContent = ['^text/html$', '^text/markdown$']
+
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.8
+
+[params]
+  author = "Faizan Nadeem"
+  email = "imfaizannadeem@gmail.com"
+  ogImage = "https://faaaizan.space/assets/favicon/android-chrome-512x512.png"
+  gaId = "G-MVPZY7B4V2"
+  linkedin = "https://www.linkedin.com/in/mfaizan422"
+  github = "https://github.com/FaizanNadeem1287"
+  whatsapp = "https://wa.me/923185536300"
+  facebook = "https://www.facebook.com/faizannadeem1287"
+  instagram = "https://www.instagram.com/_faizan_nadeem/"
+  calendly = "https://calendly.com/ffaaizan/meet-faizan"

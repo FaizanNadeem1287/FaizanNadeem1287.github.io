@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {{ block "head" . }}{{ partial "head.html" . }}{{ end }}
+  </head>
+  <body>
+    {{ block "main" . }}{{ end }}
+    {{ block "scripts" . }}{{ end }}
+  </body>
+</html>

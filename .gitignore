@@ -1,1 +1,6 @@
 .commandcode/taste/taste.md
+
+# Hugo
+public/
+resources/
+.hugo_build.lock
