@@ -3,12 +3,20 @@
   function gtag() {
     dataLayer.push(arguments);
   }
-  window.addEventListener("load", function () {
-    var s = document.createElement("script");
-    s.src = "https://www.googletagmanager.com/gtag/js?id={{ site.Params.gaId }}";
-    s.async = true;
-    document.head.appendChild(s);
-    gtag("js", new Date());
-    gtag("config", "{{ site.Params.gaId }}");
-  });
+  (function () {
+    var loaded = false;
+    function loadGA() {
+      if (loaded) return;
+      loaded = true;
+      var s = document.createElement("script");
+      s.src = "https://www.googletagmanager.com/gtag/js?id={{ site.Params.gaId }}";
+      s.async = true;
+      document.head.appendChild(s);
+      gtag("js", new Date());
+      gtag("config", "{{ site.Params.gaId }}");
+    }
+    ["pointerdown", "keydown", "touchstart", "scroll"].forEach(function (evt) {
+      window.addEventListener(evt, loadGA, { once: true, passive: true });
+    });
+  })();
 </script>

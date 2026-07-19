@@ -16,5 +16,8 @@
 <meta name="twitter:description" content="{{ .Params.socialDescription | default .Description }}" />
 <meta name="twitter:image" content="{{ site.Params.ogImage }}" />
 {{ partial "head-assets.html" . }}
-<link rel="stylesheet" href="{{ .Params.css | default "/styles/styles.css" }}" />
+{{- $cssPath := .Params.css | default "/styles/styles.css" -}}
+{{- with resources.Get (strings.TrimPrefix "/" $cssPath) | minify -}}
+<style>{{ .Content | safeCSS }}</style>
+{{- end -}}
 {{ partial "jsonld.html" . }}

@@ -25,7 +25,7 @@
         <p class="footer-col-label">Contact</p>
         <ul class="footer-links">
           <li>
-            <a href="mailto:{{ site.Params.email }}" target="_blank"
+            <a href="mailto:{{ site.Params.email }}"
               >{{ site.Params.email }}</a
             >
           </li>
@@ -33,6 +33,7 @@
             <a
               href="{{ site.Params.calendly }}"
               target="_blank"
+          rel="noopener noreferrer"
               >Schedule a call</a
             >
           </li>
@@ -43,11 +44,13 @@
         <ul class="footer-links">
           <li>
             <a href="{{ site.Params.github }}" target="_blank"
+          rel="noopener noreferrer"
               >GitHub</a
             >
           </li>
           <li>
             <a href="{{ site.Params.linkedin }}" target="_blank"
+          rel="noopener noreferrer"
               >LinkedIn</a
             >
           </li>
@@ -60,6 +63,7 @@
         <a
           href="{{ site.Params.linkedin }}"
           target="_blank"
+          rel="noopener noreferrer"
           style="color: white; text-decoration: none"
           >Faizan Nadeem</a
         ></span
@@ -68,7 +72,6 @@
       <div class="footer-socials">
         <a
           href="mailto:{{ site.Params.email }}"
-          target="_blank"
           class="footer-social"
           aria-label="Email"
           >{{ partial "icons/email.html" . }}</a
@@ -76,6 +79,7 @@
         <a
           href="{{ site.Params.linkedin }}"
           target="_blank"
+          rel="noopener noreferrer"
           class="footer-social"
           aria-label="LinkedIn"
           >{{ partial "icons/linkedin.html" . }}</a
@@ -83,6 +87,7 @@
         <a
           href="{{ site.Params.github }}"
           target="_blank"
+          rel="noopener noreferrer"
           class="footer-social"
           aria-label="GitHub"
           >{{ partial "icons/github.html" . }}</a
@@ -90,6 +95,7 @@
         <a
           href="{{ site.Params.whatsapp }}"
           target="_blank"
+          rel="noopener noreferrer"
           class="footer-social"
           aria-label="WhatsApp"
           >{{ partial "icons/whatsapp.html" . }}</a
@@ -97,6 +103,7 @@
         <a
           href="{{ site.Params.facebook }}"
           target="_blank"
+          rel="noopener noreferrer"
           class="footer-social"
           aria-label="Facebook"
           >{{ partial "icons/facebook.html" . }}</a
@@ -104,6 +111,7 @@
         <a
           href="{{ site.Params.instagram }}"
           target="_blank"
+          rel="noopener noreferrer"
           class="footer-social"
           aria-label="Instagram"
           >{{ partial "icons/instagram.html" . }}</a

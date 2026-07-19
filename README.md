@@ -62,7 +62,7 @@ Everything below the front matter is the case-study page body. Markdown works:
 The client needed X, so I built Y...
 ```
 
-Raw HTML also works if you want the full designed layout — see the three existing case studies (they are `.html` content files using classes from `styles/project.css` such as `proj-header`, `overview-section`, `tech-grid`, `timeline-section`, `outcomes-section`).
+Raw HTML also works if you want the full designed layout — see the three existing case studies (they are `.html` content files using classes from `assets/styles/project.css` such as `proj-header`, `overview-section`, `tech-grid`, `timeline-section`, `outcomes-section`).
 
 ### The three kinds of project cards
 
@@ -106,10 +106,13 @@ Check http://localhost:1313/ (homepage grid, if `featured: true`), http://localh
 | `content/projects/` | One file per project (see above) |
 | `layouts/` | Templates — `home.html`, `projects/section.html` (list), `projects/page.html` (case study) |
 | `layouts/_partials/` | Shared pieces: `head.html` (all meta/SEO tags), `jsonld.html` (structured data), `nav.html`, `footer.html`, `project-card.html`, `ga.html`, social icons |
-| `static/` | Served as-is: fonts, favicons, CSS, `CNAME`, `robots.txt`, `llm.txt` |
+| `static/` | Served as-is: fonts, favicons, tech icons, `CNAME`, `robots.txt`, `llm.txt` |
+| `assets/styles/` | CSS — minified and inlined into each page at build time via Hugo Pipes |
 | `archetypes/projects.md` | Template used by `hugo new projects/...` |
 | `hugo.toml` | Site config: base URL, contact/social links, GA ID, sitemap defaults |
 
 SEO (canonical URLs, Open Graph, Twitter cards, JSON-LD, sitemap) is generated from front matter by the templates — there is nothing to hand-edit per page.
 
 Note: the three original case studies pin their old `.html` URLs with a `url:` field in front matter to preserve SEO. New projects should **not** set `url:` — they get clean directory URLs automatically.
+
+The `css:` front-matter value (e.g. `/styles/project.css`) is resolved against `assets/` at build time — usage is unchanged even though the CSS files moved.

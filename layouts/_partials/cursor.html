@@ -1,0 +1,40 @@
+<script>
+  // Custom cursor — desktop pointers only, skipped for touch and reduced motion
+  (function () {
+    var cursor = document.getElementById("cursor");
+    var ring = document.getElementById("cursorRing");
+    if (!cursor || !ring) return;
+    if (
+      !window.matchMedia("(pointer: fine)").matches ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    )
+      return;
+    var mx = 0,
+      my = 0,
+      rx = 0,
+      ry = 0,
+      raf = null;
+    document.addEventListener(
+      "mousemove",
+      function (e) {
+        mx = e.clientX;
+        my = e.clientY;
+        cursor.style.transform =
+          "translate3d(" + (mx - 4) + "px," + (my - 4) + "px,0)";
+        if (raf === null) raf = requestAnimationFrame(animRing);
+      },
+      { passive: true },
+    );
+    function animRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.transform =
+        "translate3d(" + (rx - 16) + "px," + (ry - 16) + "px,0)";
+      if (Math.abs(mx - rx) > 0.2 || Math.abs(my - ry) > 0.2) {
+        raf = requestAnimationFrame(animRing);
+      } else {
+        raf = null;
+      }
+    }
+  })();
+</script>
