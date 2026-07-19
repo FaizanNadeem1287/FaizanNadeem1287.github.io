@@ -1,0 +1,347 @@
+{{ define "main" }}
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    {{ partial "nav.html" . }}
+
+<main>
+    <!-- PROJECT HEADER -->
+    <header class="proj-header">
+      <div class="proj-breadcrumb reveal">
+        Projects <span>/</span> {{ .Title }}
+      </div>
+
+      <!-- Meta strip -->
+      {{ with .Params.projectMeta }}
+      <div class="proj-meta-strip reveal rd2">
+        <div class="meta-cell">
+          <div class="meta-label">Role</div>
+          <div class="meta-value">{{ .role }}</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-label">Timeline</div>
+          <div class="meta-value">{{ .timeline }}</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-label">Team size</div>
+          <div class="meta-value">{{ .teamSize }}</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-label">Status</div>
+          <div class="meta-value{{ if .statusDot }} accent{{ end }}">{{ if .statusDot }}● {{ end }}{{ .status }}</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-label">Category</div>
+          <div class="meta-value">{{ .category }}</div>
+        </div>
+      </div>
+      {{ end }}
+    </header>
+
+    <!-- BODY -->
+    <div class="proj-body">
+      <!-- Overview + Stats -->
+      <div class="overview-section">
+        <div class="overview-body reveal">
+          <div class="section-kicker">{{ .Params.overview.kicker | default "Overview" }}</div>
+          <h1 class="overview-heading">
+            {{ .Params.overview.heading }}
+          </h1>
+          {{ .Content }}
+        </div>
+        {{ with .Params.stats }}
+        <div class="stats-col reveal rd1">
+          {{ range . }}
+          <div class="stat-row">
+            <div class="stat-big">{{ .value }}</div>
+            <div class="stat-caption">{{ .caption }}</div>
+          </div>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+
+      <!-- Core Features -->
+      {{ if or .Params.features .Params.capabilities }}
+      <div class="two-col-section reveal">
+        <div class="two-col-cell challenge">
+          <h2>Core features</h2>
+          <ul class="point-list">
+            {{ range .Params.features }}
+            <li>{{ . }}</li>
+            {{ end }}
+          </ul>
+        </div>
+        <div class="two-col-cell solution">
+          <h2>Platform capabilities</h2>
+          <ul class="point-list">
+            {{ range .Params.capabilities }}
+            <li>{{ . }}</li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+      {{ end }}
+
+      <!-- Technical Architecture -->
+      {{ with .Params.techArchitecture }}
+      <div class="tech-section reveal">
+        <h2 class="tech-section-heading">Technical architecture</h2>
+        <p class="overview-body reveal">
+          {{ .description }}
+        </p>
+        <div class="tech-grid">
+          {{ range .stack }}
+          <div class="tech-card">
+            <div class="tech-icon">
+              <img loading="lazy" src="{{ .icon }}" alt="{{ .name }} logo" width="28" height="28" />
+            </div>
+            <div class="tech-name">{{ .name }}</div>
+            <div class="tech-desc">
+              {{ .desc }}
+            </div>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+
+      <!-- Challenges & Solutions -->
+      {{ if or .Params.challenges .Params.solutions }}
+      <div class="two-col-section reveal">
+        <div class="two-col-cell challenge">
+          <h2>Challenges</h2>
+          <ul class="point-list">
+            {{ range .Params.challenges }}
+            <li>{{ . }}</li>
+            {{ end }}
+          </ul>
+        </div>
+        <div class="two-col-cell solution">
+          <h2>Solutions</h2>
+          <ul class="point-list">
+            {{ range .Params.solutions }}
+            <li>{{ . }}</li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+      {{ end }}
+
+      <!-- Code Spotlight -->
+      {{ with .Params.codeSpotlight }}
+      <div class="code-section reveal">
+        <h2 class="code-section-heading">Code spotlight</h2>
+        <div class="code-tabs">
+          {{ range $i, $tab := .tabs }}
+          <button type="button" class="code-tab{{ if eq $i 0 }} active{{ end }}" onclick="switchCode({{ $i }}, this)">
+            {{ $tab.title }}
+          </button>
+          {{ end }}
+        </div>
+
+        {{ range $i, $tab := .tabs }}
+        <div class="code-panel{{ if eq $i 0 }} active{{ end }}" id="code-{{ $i }}">
+          <div class="code-window">
+            <div class="code-window-bar">
+              <div class="code-dot cd1"></div>
+              <div class="code-dot cd2"></div>
+              <div class="code-dot cd3"></div>
+              <span class="code-file">{{ $tab.file }}</span>
+            </div>
+            <pre>{{ $tab.code }}</pre>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+      {{ end }}
+
+      <!-- Build Timeline -->
+      {{ with .Params.timeline }}
+      <div class="timeline-section reveal">
+        <h2 class="timeline-section-heading">Build timeline</h2>
+        <div class="timeline">
+          {{ range . }}
+          <div class="tl-item done">
+            <div class="tl-dot"></div>
+            <div class="tl-sprint">{{ .sprint }}</div>
+            <div class="tl-event">{{ .event }}</div>
+            <div class="tl-detail">
+              {{ .detail }}
+            </div>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+
+      <!-- Outcomes -->
+      {{ with .Params.outcomes }}
+      <div class="outcomes-section reveal">
+        <h2 class="outcomes-heading">Outcomes</h2>
+        <div class="outcomes-grid">
+          {{ range . }}
+          <div class="outcome-card">
+            <div class="outcome-num">{{ .num }}</div>
+            <div class="outcome-label">
+              {{ .label }}
+            </div>
+            <span class="outcome-badge">{{ .badge }}</span>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+
+      <!-- More Projects -->
+      <div class="more-section reveal">
+        <h2 class="more-heading">More projects</h2>
+        <div class="more-grid">
+          <a href="/projects/elevaiyt-ai-based-business-assessment-intelligence-platform/" class="more-card">
+            <div class="more-num">01</div>
+            <div class="more-name">ElevAIyt — AI Risk Intelligence Platform</div>
+            <div class="more-desc">
+              AI powered risk intelligence, governance, and compliant report pipelines.
+            </div>
+            <div class="more-tags">
+              <span class="more-tag">FastAPI</span>
+              <span class="more-tag">PostgreSQL</span>
+              <span class="more-tag">AWS S3</span>
+              <span class="more-tag">OpenAI</span>
+            </div>
+            <span class="more-arrow">View project →</span>
+          </a>
+          <a href="/projects/ai-rfp-manager-ai-powered-tender-management/" class="more-card">
+            <div class="more-num">02</div>
+            <div class="more-name">AI RFP Manager — AI-Powered Tender Management</div>
+            <div class="more-desc">
+              AI-driven tender management with automated proposal generation and a Go/No-Go decision engine.
+            </div>
+            <div class="more-tags">
+              <span class="more-tag">FastAPI</span>
+              <span class="more-tag">Pinecone</span>
+              <span class="more-tag">LLM / RAG</span>
+            </div>
+            <span class="more-arrow">View project →</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- /proj-body -->
+</main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-name">Faizan_</div>
+      <span class="footer-copy">© 2026 · All rights reserved</span>
+      <a href="/#projects" class="footer-back">
+        <svg
+          viewBox="0 0 24 24"
+          width="14"
+          height="14"
+          stroke="currentColor"
+          fill="none"
+          stroke-width="1.5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19 12H5M12 5l-7 7 7 7"
+          />
+        </svg>
+        Back to portfolio
+      </a>
+    </footer>
+{{ end }}
+
+{{ define "scripts" }}
+    {{ partial "cursor.html" . }}
+    <script>
+      // Nav scroll effect
+      const navbar = document.getElementById("navbar");
+      const syncNavbar = () => {
+        navbar.classList.toggle("scrolled", window.scrollY > 40);
+      };
+      window.addEventListener("scroll", syncNavbar);
+      syncNavbar();
+
+      // Scroll reveal
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.1 },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+      // Hero reveal on load
+      document
+        .querySelectorAll(
+          ".proj-breadcrumb,.proj-title-row,.proj-meta-strip,.proj-visual-wrap",
+        )
+        .forEach((el, i) => {
+          el.style.opacity = "0";
+          el.style.transform = "translateY(20px)";
+          el.style.transition = `opacity .7s ease ${i * 0.12}s, transform .7s ease ${i * 0.12}s`;
+          setTimeout(
+            () => {
+              el.style.opacity = "1";
+              el.style.transform = "none";
+            },
+            80 + i * 120,
+          );
+        });
+
+      // Code tabs
+      function switchCode(idx, tab) {
+        document
+          .querySelectorAll(".code-tab")
+          .forEach((t, i) => t.classList.toggle("active", i === idx));
+        document
+          .querySelectorAll(".code-panel")
+          .forEach((p, i) => p.classList.toggle("active", i === idx));
+      }
+
+      function escapeHtml(value) {
+        if (!value) return "";
+        return value
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+      }
+
+      function highlightPython(pre) {
+        let code = pre.textContent;
+        code = escapeHtml(code);
+        code = code.replace(/#.*$/gm, '<span class="cm">$&</span>');
+        code = code.replace(
+          /("""[\s\S]*?"""|'''[\s\S]*?'''|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')/g,
+          '<span class="str">$1</span>',
+        );
+        code = code.replace(
+          /\b(async|await|class|def|return|from|import|as|if|else|elif|for|while|in|try|except|finally|with|pass|raise|yield|continue|break|and|or|not|is|None|True|False)\b/g,
+          '<span class="kw">$1</span>',
+        );
+        code = code.replace(
+          /\b(str|int|float|dict|list|set|tuple|bool|Any|Dict|List|Optional)\b/g,
+          '<span class="tp">$1</span>',
+        );
+        code = code.replace(
+          /\b([A-Z][A-Za-z0-9_]*)\b/g,
+          '<span class="fn">$1</span>',
+        );
+        {{ with .Params.highlightNames }}
+        code = code.replace(
+          new RegExp("\\b(" + {{ delimit . "|" }} + ")\\b", "g"),
+          '<span class="nm">$1</span>',
+        );
+        {{ end }}
+        pre.innerHTML = code;
+      }
+
+      document.querySelectorAll(".code-panel pre").forEach(highlightPython);
+    </script>
+    {{ partial "ga.html" . }}
+{{ end }}
